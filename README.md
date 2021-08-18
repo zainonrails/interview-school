@@ -1,5 +1,43 @@
 # Inteview Take-Home Project
 
+## Technical Documentation
+
+
+*The application has new models:*
+
+1. `Student`
+2. `ClassRoom`
+3. `Section`
+   1. Join model to contain information regarding teacher, subject, classroom along with specific section timings and days.
+4. `StudentSection`
+   1. Join model to contain student enrolled sections
+
+*New Controllers to handle add/remove student section*
+
+1. `SectionsController` has a single action for showing all sections in the system
+2. `SchedulesController` handles the request for adding and removing sections from students schedule
+
+*A service class was introduced to handle schedule creation process*
+
+`Schedules::ScheduleCreator` takes in params and current student and validates times/day for new section to be added.
+If it has no conflict with the existing sections then adds the new section to student's schedule.
+Otherwise redirects and alerts the user.
+
+you can find service class at *`app/services/schedules/schedule_creator`*
+
+
+### Future enhancements
+
+1. If given more time, I would write tests using rspec
+2. Add docker image
+3. Replace sqlite with Postgres
+4. Create CRUD for other models
+5. Add more pages for other data to show
+
+
+
+
+
 
 ## Overview
 This application is meant to represent a school. There are teachers, subjects that they teach, and the relation between them. We want to add classrooms, students, and another model called sections. A section represents a teacher teaching a subject in a specific classroom at a specfic time with students who attend the class. Think of it like the join model between all the other entities, and with specific times. Some sections are taught only on Monday, Wednesday, and Friday, others are only taught on Tuesdays and Thursdays, and some are every day. Sections typically are 50 minutes long, but they can also be 80 minutes. The earliest sections start at 7:30am and the latest ones end at 10pm.
